@@ -1,14 +1,34 @@
 const request = require('../request');
 const db = require('../db');
-const { matchMongoId } = require('../match-helpers');
+// const { matchMongoId } = require('../match-helpers');
 
-describe.skip('tours api', () => {
+describe('tours api', () => {
   beforeEach(() => {
     db.dropCollection('tours');
   });
 
-  it('posts a tour', () => {
+  const tour = {
+    title: 'tour',
+    activities: ['touring', 'more touring'],
+    stops: []
+  };
 
+  function postTour(tour) {
+    return request 
+      .post('/api/tours')
+      .send(tour)
+      .expect(200)
+      .then(({ body }) => body);
+  }
+
+  it.only('posts a tour', () => {
+    return postTour(tour).then(tour => {
+      expect(tour).toEqual({
+        _id: expect.any(String),
+        __v: 0,
+        ...tour
+      });
+    });
   });
 
   it('gets a tour by id', () => {
