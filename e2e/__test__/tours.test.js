@@ -1,6 +1,5 @@
 const request = require('../request');
 const db = require('../db');
-// const { matchMongoId } = require('../match-helpers');
 
 describe('tours api', () => {
   beforeEach(() => {

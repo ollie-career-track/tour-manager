@@ -1,25 +1,35 @@
-jest.mock('../../lib/services/maps-api');
-jest.mock('../../lib/services/weather-api');
-const request = require('../request');
-const db = require('../db');
-const { matchMongoId } = require('../match-helpers');
-const getLocation = require('../../lib/services/maps-api');
-const getForecast = require('../../lib/services/weather-api');
+// jest.mock('../../lib/services/maps-api');
+// jest.mock('../../lib/services/weather-api');
+// const request = require('../request');
+// const db = require('../db');
+// const { matchMongoId } = require('../match-helpers');
+// const getLocation = require('../../lib/services/maps-api');
+// const getForecast = require('../../lib/services/weather-api');
 
-describe.skip('stops api', () => {
-  beforeEach(() => {
-    db.dropCollection('tours');
-  });
+// describe.skip('stops api', () => {
+//   beforeEach(() => {
+//     db.dropCollection('tours');
+//   });
 
-  it('posts a stop to a tour', () => {
+//   const tour = {
+//     title: 'tour',
+//     activities: ['touring', 'more touring'],
+//     stops: []
+//   };
 
-  });
+//   const stop = {
+    
+//   };
 
-  it('deletes a cancelled stop', () => {
+//   it('posts a stop to a tour', () => {
 
-  });
+//   });
 
-  it('it updates how many people attended', () => {
+//   it('deletes a cancelled stop', () => {
 
-  });
-});
+//   });
+
+//   it('it updates how many people attended', () => {
+
+//   });
+// });
