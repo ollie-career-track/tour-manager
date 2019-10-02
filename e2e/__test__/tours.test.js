@@ -32,7 +32,14 @@ describe('tours api', () => {
   });
 
   it('gets a tour by id', () => {
-
+    return postTour(tour)
+      .then(tour => {
+        return request.get(`/api/tours/${tour._id}`)
+          .expect(200)
+          .then(({ body }) => {
+            expect(body).toEqual(tour);
+          });
+      });
   });
 
   it('gets all tours', () => {
