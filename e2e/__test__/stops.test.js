@@ -13,20 +13,11 @@ describe('stops api', () => {
   const tour = {
     title: 'tour',
     activities: ['touring', 'more touring'],
-    stops: []
+    stops: [{
+      attendance: 1,
+      address: 'Alchemy Code Lab'
+    }]
   };
-
-  const stop = {
-    attendance: 1
-  };
-
-  function postStop(stop, tourId) {
-    return request
-      .post(`/api/tours/${tourId}/stops`)
-      .send(stop)
-      .expect(200)
-      .then(({ body }) => body);
-  }
 
   function postTour(tour) {
     return request
@@ -36,19 +27,15 @@ describe('stops api', () => {
       .then(({ body }) => body);
   }
 
-  // post tour
-  // return tour with id
-  // body._id
-
   it('posts a stop to a tour', () => {
-    return postTour(tour).then(tour => {
-      console.log(tour);
+    // return postTour(tour).then(tour => {
+    //   console.log(tour);
       
-      return postStop(stop, tour._id)
-        .then(res => {
-          console.log(res);
-        });
-    });
+    //   return postStop(stop, tour._id)
+    //     .then(res => {
+    //       console.log(res);
+    //     });
+    // });
   });
 
   it('deletes a cancelled stop', () => {
