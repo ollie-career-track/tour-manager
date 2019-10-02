@@ -1,35 +1,61 @@
-// jest.mock('../../lib/services/maps-api');
-// jest.mock('../../lib/services/weather-api');
-// const request = require('../request');
-// const db = require('../db');
-// const { matchMongoId } = require('../match-helpers');
-// const getLocation = require('../../lib/services/maps-api');
-// const getForecast = require('../../lib/services/weather-api');
+jest.mock('../../lib/services/maps-api');
+jest.mock('../../lib/services/weather-api');
+const request = require('../request');
+const db = require('../db');
+const getLocation = require('../../lib/services/maps-api');
+const getForecast = require('../../lib/services/weather-api');
 
-// describe.skip('stops api', () => {
-//   beforeEach(() => {
-//     db.dropCollection('tours');
-//   });
+describe('stops api', () => {
+  beforeEach(() => {
+    db.dropCollection('tours');
+  });
 
-//   const tour = {
-//     title: 'tour',
-//     activities: ['touring', 'more touring'],
-//     stops: []
-//   };
+  const tour = {
+    title: 'tour',
+    activities: ['touring', 'more touring'],
+    stops: []
+  };
 
-//   const stop = {
-    
-//   };
+  const stop = {
+    attendance: 1
+  };
 
-//   it('posts a stop to a tour', () => {
+  function postStop(stop, tourId) {
+    return request
+      .post(`/api/tours/${tourId}/stops`)
+      .send(stop)
+      .expect(200)
+      .then(({ body }) => body);
+  }
 
-//   });
+  function postTour(tour) {
+    return request
+      .post('/api/tours')
+      .send(tour)
+      .expect(200)
+      .then(({ body }) => body);
+  }
 
-//   it('deletes a cancelled stop', () => {
+  // post tour
+  // return tour with id
+  // body._id
 
-//   });
+  it('posts a stop to a tour', () => {
+    return postTour(tour).then(tour => {
+      console.log(tour);
+      
+      return postStop(stop, tour._id)
+        .then(res => {
+          console.log(res);
+        });
+    });
+  });
 
-//   it('it updates how many people attended', () => {
+  it('deletes a cancelled stop', () => {
 
-//   });
-// });
+  });
+
+  it('it updates how many people attended', () => {
+
+  });
+});
