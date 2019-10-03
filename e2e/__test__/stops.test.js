@@ -40,6 +40,17 @@ describe('stops api', () => {
       .then(({ body }) => body);
   }
 
+  function postTourWithStop(tour, stop) {
+    return postTour(tour)
+      .then(tour => {
+        return request
+          .post(`/api/tours/${tour._id}/stops`)
+          .send(stop)
+          .expect(200)
+          .then(({ body }) => [tour, body]);
+      });
+  }
+
   it.skip('posts a stop to a tour', () => {
     return postTour(tour).then(tour => {
       return request
@@ -74,7 +85,19 @@ describe('stops api', () => {
     });
   });
 
-  it('deletes a cancelled stop', () => {});
+  it('deletes a cancelled stop', () => {
+    return postTourWithStop(tour, stop)
+      .then(([tour, stops]) => {
+        return request
+          .delete(`/api/tours/${tour._id}/stops/${stops[0]._id}`)
+          .expect(200);
+      })
+      .then(({ body }) => {
+        expect(body.length).toBe(0);
+      });
+  });
 
-  it('it updates how many people attended', () => {});
+  it('it updates how many people attended', () => {
+
+  });
 });
