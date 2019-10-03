@@ -98,6 +98,15 @@ describe('stops api', () => {
   });
 
   it('it updates how many people attended', () => {
-
+    return postTourWithStop(tour, stop)
+      .then(([tour, stops]) => {
+        return request
+          .put(`/api/tours/${tour._id}/stops/${stops[0]._id}/attendance`)
+          .send({ attendance: 8 })
+          .expect(200);
+      })
+      .then(({ body }) => {
+        expect(body[0].attendance).toBe(8);
+      });
   });
 });
